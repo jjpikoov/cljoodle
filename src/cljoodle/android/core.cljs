@@ -2,7 +2,8 @@
   (:require [reagent.core :as r :refer [atom]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
             [cljoodle.events]
-            [cljoodle.subs]))
+            [cljoodle.subs]
+            [cljoodle.http.login]))
 
 (def ReactNative (js/require "react-native"))
 
@@ -15,7 +16,9 @@
 (def logo-img (js/require "./images/cljs.png"))
 
 (defn alert [title]
-      (.alert (.-Alert ReactNative) title))
+  (do
+    (cljoodle.http.login/login-to-moodle 1 2)
+    (.alert (.-Alert ReactNative) title)))
 
 (defn app-root []
   (let [greeting (subscribe [:get-greeting])]
