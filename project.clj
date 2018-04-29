@@ -16,7 +16,7 @@
             "advanced-build" ^{:doc "Recompile code for production using :advanced compilation."}
             ["do" "clean"
              ["with-profile" "advanced" "cljsbuild" "once"]]}
-  :jvm-opts ["-XX:+IgnoreUnrecognizedVMOptions" "--add-modules java.xml.bind"]
+  :jvm-opts ["-XX:+IgnoreUnrecognizedVMOptions" "--add-modules=java.xml.bind"]
   :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.14"]
                                   [com.cemerick/piggieback "0.2.1"]]
                    :source-paths ["src" "env/dev"]
@@ -29,7 +29,16 @@
                                                            :optimizations :none}}
                                            #_($DEV_PROFILES$)]}
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
-             :prod {:cljsbuild {:builds [{:id           "android"
+             :prod {:cljsbuild {:builds [{:id           "ios"
+                                          :source-paths ["src" "env/prod"]
+                                          :compiler     {:output-to     "index.ios.js"
+                                                         :main          "env.ios.main"
+                                                         :output-dir    "target/ios"
+                                                         :static-fns    true
+                                                         :optimize-constants true
+                                                         :optimizations :simple
+                                                         :closure-defines {"goog.DEBUG" false}}}
+                                         {:id           "android"
                                           :source-paths ["src" "env/prod"]
                                           :compiler     {:output-to     "index.android.js"
                                                          :main          "env.android.main"
@@ -40,7 +49,16 @@
                                                          :closure-defines {"goog.DEBUG" false}}}
                                          #_($PROD_PROFILES$)]}}
              :advanced {:dependencies [[react-native-externs "0.1.0"]]
-                        :cljsbuild {:builds [{:id           "android"
+                        :cljsbuild {:builds [{:id           "ios"
+                                              :source-paths ["src" "env/prod"]
+                                              :compiler     {:output-to     "index.ios.js"
+                                                             :main          "env.ios.main"
+                                                             :output-dir    "target/ios"
+                                                             :static-fns    true
+                                                             :optimize-constants true
+                                                             :optimizations :advanced
+                                                             :closure-defines {"goog.DEBUG" false}}}
+                                             {:id           "android"
                                               :source-paths ["src" "env/prod"]
                                               :compiler     {:output-to     "index.android.js"
                                                              :main          "env.android.main"
@@ -50,4 +68,3 @@
                                                              :optimizations :advanced
                                                              :closure-defines {"goog.DEBUG" false}}}
                                              #_($ADVANCED_PROFILES$)]}}})
-
