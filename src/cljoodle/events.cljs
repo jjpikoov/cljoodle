@@ -4,10 +4,14 @@
    [clojure.spec.alpha :as s]
    [cljoodle.db :as db :refer [app-db]]))
 
+
 ;; -- Interceptors ------------------------------------------------------------
 ;;
 ;; See https://github.com/Day8/re-frame/blob/master/docs/Interceptors.md
 ;;
+
+
+
 (defn check-and-throw
   "Throw an exception if db doesn't have a valid spec."
   [spec db [event]]
@@ -15,12 +19,14 @@
     (let [explain-data (s/explain-data spec db)]
       (throw (ex-info (str "Spec check after " event " failed: " explain-data) explain-data)))))
 
-(def validate-spec
-  (if goog.DEBUG
-    (after (partial check-and-throw ::db/app-db))
-    []))
+             (def validate-spec
+               (if goog.DEBUG
+                 (after (partial check-and-throw ::db/app-db))
+                 []))
 
-;; -- Handlers --------------------------------------------------------------
+
+
+             ;; -- Handlers --------------------------------------------------------------
 
 (reg-event-db
  :initialize-db
@@ -33,3 +39,18 @@
  validate-spec
  (fn [db [_ value]]
    (assoc db :greeting value)))
+
+(reg-event-db
+ :set-login
+ validate-spec
+ (fn [db [_ value]]
+   (prn "foo")
+   (assoc db :login value)))
+
+(reg-event-db
+ :set-password
+ validate-spec
+ (fn [db [_ value]]
+   (assoc db :password value)))
+
+

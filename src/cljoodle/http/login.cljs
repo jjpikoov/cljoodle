@@ -1,12 +1,26 @@
 (ns cljoodle.http.login
-  (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [cljs-http.client :as http]
-            [cljs.core.async :refer [<!]]))
+  (:require [cljoodle.http.moodle.requests :as rq]))
+
+(def login-endpoint "/login/token.php?moodlewsrestformat=json")
+
+(def moodle-login-url
+  (str rq/url-and-port login-endpoint))
 
 (defn login-to-moodle
-  "Allows to login to moodle with basic auth"
-  [login password]
-  (go (let [response (<! (try (http/post "http://example.com" {:form-params {:key1 [1 2 3] :key2 "value2"}}) 
-                              (catch :default e
-                                (println e))))]
-        (prn   response))))
+  "Allows to login to moodle providing token"
+  []
+  (rq/print-post-request-response "91f1cab7104f608a0d06fe4f34cd6e4e" "core_course_get_courses" {}))
+
+(defn get-token-basic-auth
+  "Gets token providing login and password"
+  [handler login password]
+  (rq/do-post-request handler moodle-login-url {:username login
+                                                :password password
+                                                :service "moodle_mobile_app"}))
+
+
+
+
+
+
+
