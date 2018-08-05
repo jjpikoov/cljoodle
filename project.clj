@@ -32,7 +32,7 @@
                                                            :closure-defines {"clairvoyant.core.devmode" true
                                                                              "goog.DEBUG" true}}}
                                            #_($DEV_PROFILES$)]}
-                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
+                   :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
              :prod {:cljsbuild {:builds [{:id           "ios"
                                           :source-paths ["src" "env/prod"]
                                           :compiler     {:output-to     "index.ios.js"
