@@ -7,7 +7,7 @@
 
 (defn do-post-request
   ([wstoken wsfunction handler form-params]
-   (let [form-params-to-pass (merge {:wstoken wstoken
+   (let [form-params-to-pass (merge {:wstoken    wstoken
                                      :wsfunction wsfunction} form-params)]
      (go (let [response (<! (http/post base-moodle-url {:form-params form-params-to-pass}))]
            (apply handler (list response))))))

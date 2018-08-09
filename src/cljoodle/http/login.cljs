@@ -16,7 +16,7 @@
   [handler login password]
   (rq/do-post-request handler moodle-login-url {:username login
                                                 :password password
-                                                :service "moodle_mobile_app"}))
+                                                :service  "moodle_mobile_app"}))
 
 
 

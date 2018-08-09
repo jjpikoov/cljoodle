@@ -1,8 +1,8 @@
 (ns cljoodle.events
   (:require
-   [re-frame.core :refer [reg-event-db after]]
-   [clojure.spec.alpha :as s]
-   [cljoodle.db :as db :refer [app-db]]))
+    [re-frame.core :refer [reg-event-db after]]
+    [clojure.spec.alpha :as s]
+    [cljoodle.db :as db :refer [app-db]]))
 
 
 ;; -- Interceptors ------------------------------------------------------------
@@ -19,38 +19,38 @@
     (let [explain-data (s/explain-data spec db)]
       (throw (ex-info (str "Spec check after " event " failed: " explain-data) explain-data)))))
 
-             (def validate-spec
-               (if goog.DEBUG
-                 (after (partial check-and-throw ::db/app-db))
-                 []))
+(def validate-spec
+  (if goog.DEBUG
+    (after (partial check-and-throw ::db/app-db))
+    []))
 
 
 
-             ;; -- Handlers --------------------------------------------------------------
-
-(reg-event-db
- :initialize-db
- validate-spec
- (fn [_ _]
-   app-db))
+;; -- Handlers --------------------------------------------------------------
 
 (reg-event-db
- :set-greeting
- validate-spec
- (fn [db [_ value]]
-   (assoc db :greeting value)))
+  :initialize-db
+  validate-spec
+  (fn [_ _]
+    app-db))
 
 (reg-event-db
- :set-login
- validate-spec
- (fn [db [_ value]]
-   (prn "foo")
-   (assoc db :login value)))
+  :set-greeting
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :greeting value)))
 
 (reg-event-db
- :set-password
- validate-spec
- (fn [db [_ value]]
-   (assoc db :password value)))
+  :set-login
+  validate-spec
+  (fn [db [_ value]]
+    (prn "foo")
+    (assoc db :login value)))
+
+(reg-event-db
+  :set-password
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :password value)))
 
 
