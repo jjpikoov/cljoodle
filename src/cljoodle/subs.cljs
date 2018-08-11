@@ -8,3 +8,9 @@
   (fn [db _]
     (:greeting db)))
 
+(reg-sub
+  :get-token
+  (fn [db _]
+    (:token db)))
+
+

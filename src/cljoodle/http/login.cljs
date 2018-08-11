@@ -1,26 +1,26 @@
 (ns cljoodle.http.login
-  (:require [cljoodle.http.moodle.requests :as rq]))
+  (:require [cljoodle.http.moodle.requests :as rq]
+            [env.moodle.config :as moodle-config])
+  (:use [re-frame.core :only [dispatch]]))
 
-(def login-endpoint "/login/token.php?moodlewsrestformat=json")
+(def _moodle-login-url
+  (str moodle-config/url-and-port moodle-config/login-endpoint))
 
-(def moodle-login-url
-  (str rq/url-and-port login-endpoint))
-
-(defn login-to-moodle
+(defn login-to-moodle                                       ;; TODO is this necessary
   "Allows to login to moodle providing token"
   []
-  (rq/print-post-request-response "91f1cab7104f608a0d06fe4f34cd6e4e" "core_course_get_courses" {}))
+  (rq/print-post-request-response moodle-config/wstoken "core_course_get_courses" {}))
 
-(defn get-token-basic-auth
-  "Gets token providing login and password"
-  [handler login password]
-  (rq/do-post-request handler moodle-login-url {:username login
-                                                :password password
-                                                :service  "moodle_mobile_app"}))
-
-
-
-
-
-
+(defn set-token-providing-login-password
+  "Tries to obtain token for given credentials, if succeeds dispatches token change action"
+  [login password]
+  (let [retrieve-token-from-response-func #(:token (:body %))
+        dispatch-token-change (fn [token] (dispatch [:set-token token]))]
+    (rq/do-post-request #(-> %
+                             retrieve-token-from-response-func
+                             dispatch-token-change)
+                        _moodle-login-url
+                        {:username login
+                         :password password
+                         :service  "moodle_mobile_app"})))
 
