@@ -22,29 +22,35 @@
 
 (defn app-root []
   (fn []
-    [view {:style {:flex-direction "column" :margin 40 :align-items "center"}}
-     [text {:style {:font-size     50
-                    :font-weight   "100"
-                    :margin-bottom 20
-                    :text-align    "center"}} "Cljoodle"]
-     [image {:source logo-img
-             :style  {:width         80
-                      :height        80
-                      :margin-bottom 30}}]
-     [text-input {:placeholder "Login"
-                  :style       {:width 200}
-                  }]
-     [text-input {:placeholder "Password" :style {:width 200}
-                  }]
-     [touchable-highlight {:style    {:background-color "#999"
-                                      :margin-top       30
-                                      :padding          10
-                                      :border-radius    5}
-                           :on-press #(alert "HELLO!")}
-      [text {:style {:color       "white"
-                     :text-align  "center"
-                     :font-weight "bold"}} "Login"]]]))
-[
- (defn init []
-   (dispatch-sync [:initialize-db])
-   (.registerComponent app-registry "cljoodle" #(r/reactify-component app-root)))]
+    (let [login (r/atom "")
+          password (r/atom "")]
+      (fn []
+        [view {:style {:flex-direction "column" :margin 40 :align-items "center"}}
+         [text {:style {:font-size     50
+                        :font-weight   "100"
+                        :margin-bottom 20
+                        :text-align    "center"}} "Cljoodle"]
+         [image {:source logo-img
+                 :style  {:width         80
+                          :height        80
+                          :margin-bottom 30}}]
+         [text-input {:placeholder  "Login"
+                      :style        {:width 200}
+                      :onChangeText #(reset! login %)
+                      }]
+         [text-input {:placeholder  "Password"
+                      :style        {:width 200}
+                      :onChangeText #(reset! password %)
+                      }]
+         [touchable-highlight {:style    {:background-color "#999"
+                                          :margin-top       30
+                                          :padding          10
+                                          :border-radius    5}
+                               :on-press #(alert (str @login " " @password))}
+          [text {:style {:color       "white"
+                         :text-align  "center"
+                         :font-weight "bold"}} "Login"]]]))))
+
+(defn init []
+  (dispatch-sync [:initialize-db])
+  (.registerComponent app-registry "cljoodle" #(r/reactify-component app-root)))
