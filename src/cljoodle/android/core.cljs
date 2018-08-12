@@ -4,7 +4,7 @@
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
     [cljoodle.events]
     [cljoodle.subs]
-    [cljoodle.http.login]))
+    [cljoodle.http.login :as login]))
 
 
 (def ReactNative (js/require "react-native"))
@@ -23,33 +23,35 @@
 (defn app-root []
   (fn []
     (let [login (r/atom "")
-          password (r/atom "")]
-      (fn []
-        [view {:style {:flex-direction "column" :margin 40 :align-items "center"}}
-         [text {:style {:font-size     50
-                        :font-weight   "100"
-                        :margin-bottom 20
-                        :text-align    "center"}} "Cljoodle"]
-         [image {:source logo-img
-                 :style  {:width         80
-                          :height        80
-                          :margin-bottom 30}}]
-         [text-input {:placeholder  "Login"
-                      :style        {:width 200}
-                      :onChangeText #(reset! login %)
-                      }]
-         [text-input {:placeholder  "Password"
-                      :style        {:width 200}
-                      :onChangeText #(reset! password %)
-                      }]
-         [touchable-highlight {:style    {:background-color "#999"
-                                          :margin-top       30
-                                          :padding          10
-                                          :border-radius    5}
-                               :on-press #(alert (str @login " " @password))}
-          [text {:style {:color       "white"
-                         :text-align  "center"
-                         :font-weight "bold"}} "Login"]]]))))
+          password (r/atom "")
+          token (subscribe [:get-token])]
+      [view {:style {:flex-direction "column"
+                     :margin         40
+                     :align-items    "center"}}
+       [text {:style {:font-size     50
+                      :font-weight   "100"
+                      :margin-bottom 20
+                      :text-align    "center"}} "Cljoodle"]
+       [image {:style  {:width         80
+                        :height        80
+                        :margin-bottom 30}
+               :source logo-img}]
+       [text-input {:style        {:width 200}
+                    :placeholder  "Login"
+                    :onChangeText #(reset! login %)
+                    }]
+       [text-input {:style        {:width 200}
+                    :placeholder  "Password"
+                    :onChangeText #(reset! password %)
+                    }]
+       [touchable-highlight {:style    {:background-color "#999"
+                                        :margin-top       30
+                                        :padding          10
+                                        :border-radius    5}
+                             :on-press #(login/set-token-providing-login-password @login @password)}
+        [text {:style {:color       "white"
+                       :text-align  "center"
+                       :font-weight "bold"}} "Login"]]])))
 
 (defn init []
   (dispatch-sync [:initialize-db])

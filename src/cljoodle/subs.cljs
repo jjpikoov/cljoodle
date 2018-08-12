@@ -12,5 +12,3 @@
   :get-token
   (fn [db _]
     (:token db)))
-
-

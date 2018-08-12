@@ -45,19 +45,3 @@
   validate-spec
   (fn [db [_ value]]
     (assoc db :token value)))
-
-
-;(reg-event-db
-;  :set-login
-;  validate-spec
-;  (fn [db [_ value]]
-;    (prn "foo")
-;    (assoc db :login value)))
-;
-;(reg-event-db
-;  :set-password
-;  validate-spec
-;  (fn [db [_ value]]
-;    (assoc db :password value)))
-
-
