@@ -1,57 +1,15 @@
 (ns cljoodle.android.core
   (:require
     [reagent.core :as r :refer [atom]]
-    [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-    [cljoodle.events]
-    [cljoodle.subs]
-    [cljoodle.http.login :as login]))
+    [re-frame.core :refer [subscribe dispatch dispatch-sync]])
+  (:use
+    [cljoodle.android.components.common]
+    [cljoodle.android.components.login-component]))
 
-
-(def ReactNative (js/require "react-native"))
-(def app-registry (.-AppRegistry ReactNative))
-(def text (r/adapt-react-class (.-Text ReactNative)))
-(def view (r/adapt-react-class (.-View ReactNative)))
-(def image (r/adapt-react-class (.-Image ReactNative)))
-(def text-input (r/adapt-react-class (.-TextInput ReactNative)))
-(def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
-
-(def logo-img (js/require "./images/cljs.png"))
-
-(defn alert [title]
-  (.alert (.-Alert ReactNative) title))
-
-(defn app-root []
-  (fn []
-    (let [login (r/atom "")
-          password (r/atom "")
-          token (subscribe [:get-token])]
-      [view {:style {:flex-direction "column"
-                     :margin         40
-                     :align-items    "center"}}
-       [text {:style {:font-size     50
-                      :font-weight   "100"
-                      :margin-bottom 20
-                      :text-align    "center"}} "Cljoodle"]
-       [image {:style  {:width         80
-                        :height        80
-                        :margin-bottom 30}
-               :source logo-img}]
-       [text-input {:style        {:width 200}
-                    :placeholder  "Login"
-                    :onChangeText #(reset! login %)
-                    }]
-       [text-input {:style        {:width 200}
-                    :placeholder  "Password"
-                    :onChangeText #(reset! password %)
-                    }]
-       [touchable-highlight {:style    {:background-color "#999"
-                                        :margin-top       30
-                                        :padding          10
-                                        :border-radius    5}
-                             :on-press #(login/set-token-providing-login-password @login @password)}
-        [text {:style {:color       "white"
-                       :text-align  "center"
-                       :font-weight "bold"}} "Login"]]])))
+(defn app-root
+  []
+  (login-component)
+  )
 
 (defn init []
   (dispatch-sync [:initialize-db])
