@@ -1,9 +1,9 @@
 (ns ^:figwheel-no-load env.android.main
   (:require [reagent.core :as r]
             [re-frame.core :refer [clear-subscription-cache!]]
-            [cljoodle.android.core :as core]
             [figwheel.client :as fw]
-            [env.config :as conf]))
+            [env.config :as conf]
+            [cljoodle.android.core :as core]))
 
 (enable-console-print!)
 
@@ -17,8 +17,8 @@
 (def root-el (r/as-element [reloader]))
 
 (defn force-reload! []
-      (clear-subscription-cache!)
-      (swap! cnt inc))
+  (clear-subscription-cache!)
+  (swap! cnt inc))
 
 (fw/start {
            :websocket-url    (:android conf/figwheel-urls)

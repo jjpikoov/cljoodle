@@ -1,16 +1,21 @@
 (ns cljoodle.android.core
   (:require
+    [re-frame.core :refer [subscribe dispatch dispatch-sync]]
     [reagent.core :as r :refer [atom]]
-    [re-frame.core :refer [subscribe dispatch dispatch-sync]])
-  (:use
-    [cljoodle.android.components.common]
-    [cljoodle.android.components.login-component]))
+    [cljoodle.events]
+    [cljoodle.subs]                                         ; TODO is needed?
+    [cljoodle.android.components.common :as comm]
+    [cljoodle.android.components.login-component :refer [login-component]]))
+
+
+
 
 (defn app-root
   []
-  (login-component)
-  )
+  (fn []
+    (login-component)
+    ))
 
 (defn init []
   (dispatch-sync [:initialize-db])
-  (.registerComponent app-registry "cljoodle" #(r/reactify-component app-root)))
+  (.registerComponent comm/app-registry "cljoodle" #(r/reactify-component app-root)))
