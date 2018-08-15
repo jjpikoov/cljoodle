@@ -10,4 +10,4 @@
 (def text-input (r/adapt-react-class (.-TextInput ReactNative)))
 (def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
 
-(def logo-img (js/require "./images/cljs.png"))
+(def logo-img (js/require "./images/cljoodle.png"))
