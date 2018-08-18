@@ -14,14 +14,12 @@
 
 (defn app-root
   []
-  ;(let [active-view (subscribe [:get-active-view])]
-  (fn []
-    (let [active-view (subscribe [:get-active-view])]
-      (if (= @active-view "login-component")
-        (login-component)
-        (if (= @active-view "menu-component")
-          (menu-component)))
-      )))
+  (let
+    [active-view (subscribe [:get-active-view])]
+    (if (= @active-view "login-component")
+      (login-component)
+      (if (= @active-view "menu-component")
+        (menu-component)))))
 
 (defn init []
   (dispatch-sync [:initialize-db])
