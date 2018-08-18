@@ -9,4 +9,5 @@
 
 ;; initial state of app-db
 (def app-db {:greeting "Hello Clojure in iOS and Android!"
+             :active-view "login-component"
              :token    nil})

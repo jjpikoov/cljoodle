@@ -5,16 +5,23 @@
     [cljoodle.events]
     [cljoodle.subs]                                         ; TODO is needed?
     [cljoodle.android.components.common :as comm]
-    [cljoodle.android.components.login-component :refer [login-component]]))
+    [cljoodle.android.components.login-component :refer [login-component]]
+    [cljoodle.android.components.menu-component :refer [menu-component]]
+    ))
 
 
 
 
 (defn app-root
   []
+  ;(let [active-view (subscribe [:get-active-view])]
   (fn []
-    (login-component)
-    ))
+    (let [active-view (subscribe [:get-active-view])]
+      (if (= @active-view "login-component")
+        (login-component)
+        (if (= @active-view "menu-component")
+          (menu-component)))
+      )))
 
 (defn init []
   (dispatch-sync [:initialize-db])

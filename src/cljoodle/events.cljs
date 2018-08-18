@@ -1,8 +1,9 @@
 (ns cljoodle.events
   (:require
-    [re-frame.core :refer [reg-event-db after]]
+    [re-frame.core :refer [reg-event-db after dispatch]]
     [clojure.spec.alpha :as spec]
-    [cljoodle.db :as db :refer [app-db]]))
+    [cljoodle.db :as db :refer [app-db]]
+    [reagent.core :as r]))
 
 
 ;; -- Interceptors ------------------------------------------------------------
@@ -41,4 +42,12 @@
   :set-token
   validate-spec
   (fn [db [_ value]]
+    (if (not (nil? value))
+      (dispatch [:set-active-view "menu-component"]))
     (assoc db :token value)))
+
+(reg-event-db
+  :set-active-view
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :active-view value)))

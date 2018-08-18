@@ -12,3 +12,8 @@
   :get-token
   (fn [db _]
     (:token db)))
+
+(reg-sub
+  :get-active-view
+  (fn [db _]
+    (:active-view db)))
