@@ -12,13 +12,14 @@
     [comm/view {:style {:flex-direction "column"
                         :margin         40
                         :align-items    "center"}}
-     [comm/text {:style {:font-size     50
+     [comm/text {:style {:font-size     40
                          :font-weight   "100"
                          :margin-bottom 20
-                         :text-align    "center"}} "Cljoodle"]
-     [comm/image {:style  {:width         80
-                           :height        80
-                           :margin-bottom 30}
+                         :text-align    "center"}} "Cljoodle!"]
+     [comm/image {:style  {:width      300
+                           :height     100
+                           :resizeMode "contain"
+                           :margin     10}
                   :source comm/logo-img}]
      [comm/text-input {:style        {:width 200}
                        :placeholder  "Login"

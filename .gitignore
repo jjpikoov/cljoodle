@@ -58,7 +58,6 @@ index.ios.js
 index.android.js
 target/
 .re-natal.local
-env/dev/env/config.cljs
 
 # Figwheel
 #
