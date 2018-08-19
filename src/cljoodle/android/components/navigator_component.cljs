@@ -22,3 +22,17 @@
                  :title   "menu"
                  :onPress #(prn "2")}]
    ])
+
+(defn title-component
+  [title]
+  [comm/view {:style {:flex-direction  "row"
+                      :align-items     "center"
+                      :justify-content "center"
+                      :backgroundColor "#0066cc"
+                      :height          50}}
+   [comm/text {:style     {:text-align  "center"
+                           :font-weight "bold"
+                           :color       "#f0f8ff"}
+               :flex-grow 1} title]
+   ])
+

@@ -3,14 +3,11 @@
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
     [reagent.core :as r :refer [atom]]
     [cljoodle.events]
-    [cljoodle.subs]                                         ; TODO is needed?
+    [cljoodle.subs]
     [cljoodle.android.components.common :as comm]
     [cljoodle.android.components.login-component :refer [login-component]]
     [cljoodle.android.components.menu-component :refer [menu-component]]
     ))
-
-
-
 
 (defn app-root
   []

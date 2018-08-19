@@ -43,7 +43,8 @@
   validate-spec
   (fn [db [_ value]]
     (if (not (nil? value))
-      (dispatch [:set-active-view "menu-component"]))
+      (dispatch [:set-active-view "menu-component"])
+      (dispatch [:set-active-view "login-component"]))
     (assoc db :token value)))
 
 (reg-event-db

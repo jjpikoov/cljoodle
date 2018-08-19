@@ -19,3 +19,7 @@
                               {:username login
                                :password password
                                :service  "moodle_mobile_app"})))
+
+(defn invalidate-current-token
+  []
+  (dispatch [:set-token]) nil)
