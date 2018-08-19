@@ -20,6 +20,6 @@
                                :password password
                                :service  "moodle_mobile_app"})))
 
-(defn invalidate-current-token
+(defn logout
   []
   (dispatch [:set-token nil]))

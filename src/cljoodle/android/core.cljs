@@ -9,21 +9,19 @@
     [cljoodle.android.components.menu-component :refer [menu-component]]
     ))
 
-(defn return-main-component
+(defn choose-main-component-to-render
   [component-name]
   (if (= component-name "login-component")
     (login-component)
     (if (= component-name "menu-component")
-      (menu-component)))
-  )
+      (menu-component))))
 
 (defn app-root
   []
   (let
     [active-view (subscribe [:get-active-view])]
     (fn []
-      [comm/view (return-main-component @active-view)]
-      )))
+      [comm/view (choose-main-component-to-render @active-view)])))
 
 (defn init []
   (dispatch-sync [:initialize-db])

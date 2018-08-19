@@ -17,7 +17,7 @@
                                           :padding          10
                                           :margin           10
                                           :width            "100%"}
-                               :on-press #(login/invalidate-current-token)}
+                               :on-press #(login/logout)}
      [comm/text {:style {:color       "white"
                          :text-align  "center"
                          :font-weight "bold"}} "Logout"]]
