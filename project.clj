@@ -5,7 +5,6 @@
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.238"]
-                 ;[com.cognitect/transit-cljs "0.8.243"]
                  [reagent "0.8.1" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server cljsjs/create-react-class]]
                  [re-frame "0.10.5"]
                  [cljs-http "0.1.45"]]

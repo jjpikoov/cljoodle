@@ -22,4 +22,4 @@
 
 (defn invalidate-current-token
   []
-  (dispatch [:set-token]) nil)
+  (dispatch [:set-token nil]))
