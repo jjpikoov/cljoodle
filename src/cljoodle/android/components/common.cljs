@@ -8,6 +8,7 @@
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def image (r/adapt-react-class (.-Image ReactNative)))
 (def text-input (r/adapt-react-class (.-TextInput ReactNative)))
+(def button (r/adapt-react-class (.-Button ReactNative)))
 (def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
 
 (def logo-img (js/require "./images/cljoodle.png"))
