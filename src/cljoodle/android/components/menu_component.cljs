@@ -18,7 +18,7 @@
                        :align-content   "space-between"
                        :height          "90%"
                        }}
-    [comm/view {:style {:flex-grow 1}}
+    [comm/scroll-view {:style {:flex-grow 1}}
      [comm/touchable-highlight {:style    {:background-color "#6e00ce"
                                            :padding          5
                                            :margin           5}
@@ -42,15 +42,6 @@
                          :text-align  "center"
                          :font-weight "bold"}} "Logout"]]]])
 
-(def items [{:title    "111111111"                          ; TODO just for debug
-             :on-press #(prn "111111111")}
-            {:title    "2222222"
-             :on-press #(prn "2222222")}
-            {:title    "3333333333333"
-             :on-press #(prn "3333333333333")}
-            ])
-
-
 (defn menu-component
   ([title data]
    [comm/view (nav/navigator-component title)
@@ -62,7 +53,7 @@
                         :align-content   "space-between"
                         :height          "90%"
                         }}
-     (into [comm/view] (menu-component data))]])
+     (into [comm/scroll-view] (menu-component data))]])
   ([data]
    (loop [remaining-data data
           converted-data []]

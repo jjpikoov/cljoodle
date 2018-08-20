@@ -6,9 +6,19 @@
     [cljoodle.android.components.menu-component :as menu]
     ))
 
+(defn _generate-test-data
+  [items-count]
+  (loop [i 0
+         acc []]
+    (if (= i items-count)
+      acc
+      (recur (inc i)
+             (into acc [{:title    i
+                         :on-press #(prn i)}]))))
+  )
 
 (defn quizes-component
   []
   [comm/view
-   [comm/view (menu/menu-component "Quizes" menu/items)]]
+   [comm/view (menu/menu-component "Quizes" (_generate-test-data 100))]]
   )
