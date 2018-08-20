@@ -7,6 +7,7 @@
     [cljoodle.android.components.common :as comm]
     [cljoodle.android.components.login-component :refer [login-component]]
     [cljoodle.android.components.menu-component :refer [menu-component]]
+    [cljoodle.android.components.quizes-component :refer [quizes-component]]
     ))
 
 (defn choose-main-component-to-render
@@ -14,7 +15,9 @@
   (if (= component-name "login-component")
     (login-component)
     (if (= component-name "menu-component")
-      (menu-component))))
+      (menu-component)
+      (if (= component-name "quizes-component")
+        (quizes-component)))))
 
 (defn app-root
   []

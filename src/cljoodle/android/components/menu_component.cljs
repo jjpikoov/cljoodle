@@ -22,7 +22,7 @@
      [comm/touchable-highlight {:style    {:background-color "#6e00ce"
                                            :padding          5
                                            :margin           5}
-                                :on-press #(prn "Quizes")}
+                                :on-press #(dispatch [:set-active-view "quizes-component"])}
       [comm/text {:style {:color       "white"
                           :text-align  "center"
                           :font-weight "bold"}} "Quizes"]]

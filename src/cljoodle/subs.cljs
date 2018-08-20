@@ -17,3 +17,8 @@
   :get-active-view
   (fn [db _]
     (:active-view db)))
+
+(reg-sub
+  :get-previous-view
+  (fn [db _]
+    (:previous-view db)))

@@ -52,4 +52,11 @@
   :set-active-view
   validate-spec
   (fn [db [_ value]]
+    (dispatch [:set-previous-view (:active-view db)])
     (assoc db :active-view value)))
+
+(reg-event-db
+  :set-previous-view
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :previous-view value)))
