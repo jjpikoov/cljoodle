@@ -8,6 +8,6 @@
   (spec/keys :req-un [::greeting]))
 
 ;; initial state of app-db
-(def app-db {:greeting "Hello Clojure in iOS and Android!"
+(def app-db {:greeting    "Hello Clojure in iOS and Android!"
              :active-view "login-component"
-             :token    nil})
+             :token       ""})

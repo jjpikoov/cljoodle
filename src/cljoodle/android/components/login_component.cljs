@@ -5,10 +5,19 @@
     [cljoodle.android.components.common :as comm]
     [cljoodle.http.login :as login]))
 
+(defn wrong-login-password-component
+  [token]
+  (if (nil? token)
+    [comm/text {:style {:font-size  15
+                        :margin-top 15
+                        :color      "red"
+                        :text-align "center"}} "Wrong login or/and password!"]))
+
 (defn login-component
   []
   (let [login (r/atom "")
-        password (r/atom "")]
+        password (r/atom "")
+        token (subscribe [:get-token])]
     [comm/view {:style {:flex-direction "column"
                         :margin         40
                         :align-items    "center"}}
@@ -21,6 +30,7 @@
                            :resizeMode "contain"
                            :margin     10}
                   :source comm/logo-img}]
+     [comm/view (wrong-login-password-component @token)]
      [comm/text-input {:style        {:width 200}
                        :placeholder  "Login"
                        :onChangeText #(reset! login %)

@@ -22,4 +22,4 @@
 
 (defn logout
   []
-  (dispatch [:set-token nil]))
+  (dispatch [:set-token ""]))

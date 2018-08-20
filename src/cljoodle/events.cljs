@@ -42,9 +42,10 @@
   :set-token
   validate-spec
   (fn [db [_ value]]
-    (if (not (nil? value))
-      (dispatch [:set-active-view "menu-component"])
-      (dispatch [:set-active-view "login-component"]))
+    (if (or (= value "")
+            (nil? value))
+      (dispatch [:set-active-view "login-component"])
+      (dispatch [:set-active-view "menu-component"]))
     (assoc db :token value)))
 
 (reg-event-db
