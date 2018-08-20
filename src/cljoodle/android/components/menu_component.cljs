@@ -6,7 +6,7 @@
     [cljoodle.http.login :as login]
     ))
 
-(defn menu-component
+(defn main-menu-component
   []
   [comm/view (nav/title-component "MENU")
    [comm/view {:style {
@@ -41,3 +41,41 @@
      [comm/text {:style {:color       "white"
                          :text-align  "center"
                          :font-weight "bold"}} "Logout"]]]])
+
+(def items [{:title    "111111111"                          ; TODO just for debug
+             :on-press #(prn "111111111")}
+            {:title    "2222222"
+             :on-press #(prn "2222222")}
+            {:title    "3333333333333"
+             :on-press #(prn "3333333333333")}
+            ])
+
+
+(defn menu-component
+  ([title data]
+   [comm/view (nav/navigator-component title)
+    [comm/view {:style {:flex-direction  "column"
+                        :flex-wrap       "nowrap"
+                        :justify-content "space-between"
+                        :margin-top      "5%"
+                        :align-items     "stretch"
+                        :align-content   "space-between"
+                        :height          "90%"
+                        }}
+     (into [comm/view] (menu-component data))]])
+  ([data]
+   (loop [remaining-data data
+          converted-data []]
+     (if (empty? remaining-data)
+       converted-data
+       (let [[head & rest] remaining-data]
+         (recur rest
+                (into converted-data
+                      [[comm/touchable-highlight {:style    {:background-color "#6e00ce"
+                                                             :padding          5
+                                                             :margin           5}
+                                                  :on-press (:on-press head)}
+                        [comm/text {:style {:color       "white"
+                                            :text-align  "center"
+                                            :font-weight "bold"}} (:title head)]]]
+                      )))))))

@@ -6,7 +6,7 @@
     [cljoodle.subs]
     [cljoodle.android.components.common :as comm]
     [cljoodle.android.components.login-component :refer [login-component]]
-    [cljoodle.android.components.menu-component :refer [menu-component]]
+    [cljoodle.android.components.menu-component :refer [main-menu-component]]
     [cljoodle.android.components.quizes-component :refer [quizes-component]]
     ))
 
@@ -15,7 +15,7 @@
   (if (= component-name "login-component")
     (login-component)
     (if (= component-name "menu-component")
-      (menu-component)
+      (main-menu-component)
       (if (= component-name "quizes-component")
         (quizes-component)))))
 
