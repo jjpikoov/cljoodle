@@ -1,5 +1,5 @@
 (ns cljoodle.http.login
-  (:require [cljoodle.http.moodle.requests :as requests]
+  (:require [cljoodle.http.util.requests :as requests]
             [env.moodle.config :as moodle-config])
   (:use [re-frame.core :only [dispatch]]))
 
