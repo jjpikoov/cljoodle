@@ -3,9 +3,12 @@
             [env.moodle.config :as moodle-config])
   (:use [re-frame.core :only [dispatch]]))
 
+(def _login-endpoint (str "/login/token.php"
+                          "?" moodle-config/moodle-json-wrap-response-url-param))
+
 (def _moodle-login-url
   (str moodle-config/url-and-port
-       moodle-config/login-endpoint))
+       _login-endpoint))
 
 (defn set-token-providing-login-password
   "Tries to obtain token for given credentials, if succeeds dispatches token change action"
