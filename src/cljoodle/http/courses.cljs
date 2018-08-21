@@ -1,6 +1,5 @@
 (ns cljoodle.http.courses
   (:require [cljoodle.http.util.requests :as requests]
-            [env.moodle.config :as moodle-config]
             [cljoodle.http.common :as http-comm])
   (:use [re-frame.core :only [dispatch]]))
 

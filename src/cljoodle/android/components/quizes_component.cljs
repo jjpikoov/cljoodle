@@ -13,4 +13,25 @@
     [course-id (subscribe [:get-active-course-id])]
     (if (nil? @course-id)
       (dispatch [:set-active-view "courses-component"]))
-    [rw/view (nav/navigator-component "Quizes")]))
+    [rw/view (nav/navigator-component "Quizes")
+     [rw/view {:style {:flex-direction  "column"
+                       :flex-wrap       "nowrap"
+                       :justify-content "space-between"
+                       :margin-top      "5%"
+                       :align-items     "stretch"
+                       :align-content   "space-between"
+                       :height          "90%"}}
+      [rw/text {:style {:font-size     20
+                        :font-weight   "100"
+                        :margin-bottom 20
+                        :text-align    "center"}} "Choose course"]
+      ;(into [rw/scroll-view]
+      ;      (menu-list/menu-list-component
+      ;        (let
+      ;          [quizes ]
+      ;          [converting-function (partial cc/convert-course-to-menu-component-format
+      ;                                        (fn [id]
+      ;                                          (fn [] (dispatch [:set-active-course-id id]))))]
+      ;          (map converting-function @courses))))
+      ]
+     ]))

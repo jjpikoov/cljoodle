@@ -33,12 +33,6 @@
     app-db))
 
 (reg-event-db
-  :set-greeting
-  validate-spec
-  (fn [db [_ value]]
-    (assoc db :greeting value)))
-
-(reg-event-db
   :set-token
   validate-spec
   (fn [db [_ value]]
