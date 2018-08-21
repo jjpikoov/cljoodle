@@ -1,4 +1,4 @@
-(ns cljoodle.android.components.common
+(ns cljoodle.android.components.common.react-wrappers
   (:require [reagent.core :as r]))
 
 (def ReactNative (js/require "react-native"))

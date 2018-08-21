@@ -21,7 +21,3 @@
                               {:username login
                                :password password
                                :service  "moodle_mobile_app"})))
-
-(defn logout
-  []
-  (dispatch [:set-token ""]))

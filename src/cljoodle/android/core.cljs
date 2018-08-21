@@ -4,13 +4,13 @@
     [reagent.core :as r :refer [atom]]
     [cljoodle.events]
     [cljoodle.subs]
-    [cljoodle.android.components.common :as comm]
+    [cljoodle.android.components.common.react-wrappers :as rw]
     [cljoodle.android.components.login-component :refer [login-component]]
-    [cljoodle.android.components.menu-component :refer [main-menu-component]]
+    [cljoodle.android.components.main-menu-component :refer [main-menu-component]]
     [cljoodle.android.components.quizes-component :refer [quizes-component]]
     ))
 
-(defn choose-main-component-to-render
+(defn _choose-main-component-to-render
   [component-name]
   (if (= component-name "login-component")
     (login-component)
@@ -24,8 +24,8 @@
   (let
     [active-view (subscribe [:get-active-view])]
     (fn []
-      [comm/view (choose-main-component-to-render @active-view)])))
+      [rw/view (_choose-main-component-to-render @active-view)])))
 
 (defn init []
   (dispatch-sync [:initialize-db])
-  (.registerComponent comm/app-registry "cljoodle" #(r/reactify-component app-root)))
+  (.registerComponent rw/app-registry "cljoodle" #(r/reactify-component app-root)))
