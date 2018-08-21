@@ -34,7 +34,7 @@
                        :align-content   "space-between"
                        :height          "85%"}}
       [rw/scroll-view {:style {:flex-grow 1}}
-       (_generate-menu-item "Quizes" #(dispatch [:set-active-view "quizes-component"]))
+       (_generate-menu-item "Quizzes" #(dispatch [:set-active-view "quizzes-component"]))
        (_generate-menu-item "FOO" #(prn "FOOO"))]
       [rw/touchable-highlight {:style    {:background-color "#c242f4"
                                           :padding          10

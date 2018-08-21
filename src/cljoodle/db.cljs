@@ -12,4 +12,5 @@
              :previous-view    nil
              :token            ""
              :courses          nil
+             :quizzes          nil
              :active-course-id nil})

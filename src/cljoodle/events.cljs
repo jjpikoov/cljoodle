@@ -68,3 +68,9 @@
     (if (not (nil? value))
       (dispatch [:set-active-view (:previous-view db)]))
     (assoc db :active-course-id value)))
+
+(reg-event-db
+  :set-quizzes
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :quizzes value)))

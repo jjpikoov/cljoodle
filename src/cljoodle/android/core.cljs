@@ -7,7 +7,7 @@
     [cljoodle.android.components.common.react-wrappers :as rw]
     [cljoodle.android.components.login-component :refer [login-component]]
     [cljoodle.android.components.main-menu-component :refer [main-menu-component]]
-    [cljoodle.android.components.quizes-component :refer [quizes-component]]
+    [cljoodle.android.components.quizzes-component :refer [quizzes-component]]
     [cljoodle.android.components.courses-component :refer [courses-component]]
 
     ))
@@ -18,8 +18,8 @@
     (login-component)
     (if (= component-name "menu-component")
       (main-menu-component)
-      (if (= component-name "quizes-component")
-        (quizes-component)
+      (if (= component-name "quizzes-component")
+        (quizzes-component)
         (if (= component-name "courses-component")
           (courses-component))))))
 

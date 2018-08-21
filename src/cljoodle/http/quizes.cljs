@@ -1,10 +1,10 @@
-(ns cljoodle.http.quizes
+(ns cljoodle.http.quizzes
   (:require [cljoodle.http.util.requests :as requests]
             [cljoodle.http.common :as http-comm])
   (:use [re-frame.core :only [dispatch]]))
 
 
-(defn get-quizes
+(defn get-quizzes
   [handler token course-id]
   (let
     [symbols-needed [:id :name]
