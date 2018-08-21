@@ -44,7 +44,9 @@
                                            :margin-top       30
                                            :padding          10
                                            :border-radius    5}
-                                :on-press #(login/set-token-providing-login-password @login @password)}
+                                :on-press #(login/get-token-providing-login-password
+                                             (fn [token] (dispatch [:set-token token]))
+                                             @login @password)}
       [comm/text {:style {:color       "white"
                           :text-align  "center"
                           :font-weight "bold"}} "Login"]]]))

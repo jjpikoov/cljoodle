@@ -10,14 +10,13 @@
   (str moodle-config/url-and-port
        _login-endpoint))
 
-(defn set-token-providing-login-password
+(defn get-token-providing-login-password
   "Tries to obtain token for given credentials, if succeeds dispatches token change action"
-  [login password]
-  (let [retrieve-token-from-response-func #(:token (:body %))
-        dispatch-token-change (fn [token] (dispatch [:set-token token]))]
+  [handler login password]
+  (let [retrieve-token-from-response-func #(:token (:body %))]
     (requests/do-post-request #(-> %
                                    retrieve-token-from-response-func
-                                   dispatch-token-change)
+                                   handler)
                               _moodle-login-url
                               {:username login
                                :password password

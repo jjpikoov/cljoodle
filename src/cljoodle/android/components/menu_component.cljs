@@ -16,7 +16,7 @@
                        :margin-top      "5%"
                        :align-items     "stretch"
                        :align-content   "space-between"
-                       :height          "90%"
+                       :height          "85%"
                        }}
     [comm/scroll-view {:style {:flex-grow 1}}
      [comm/touchable-highlight {:style    {:background-color "#6e00ce"
