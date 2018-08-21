@@ -22,3 +22,8 @@
   :get-previous-view
   (fn [db _]
     (:previous-view db)))
+
+(reg-sub
+  :get-courses
+  (fn [db _]
+    (:courses db)))

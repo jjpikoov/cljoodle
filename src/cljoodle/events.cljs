@@ -45,7 +45,7 @@
     (if (or (= value "")
             (nil? value))
       (dispatch [:set-active-view "login-component"])
-      (dispatch [:set-active-view "menu-component"]))
+      (do (dispatch [:set-active-view "menu-component"])))
     (assoc db :token value)))
 
 (reg-event-db
@@ -60,3 +60,9 @@
   validate-spec
   (fn [db [_ value]]
     (assoc db :previous-view value)))
+
+(reg-event-db
+  :set-courses
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :courses value)))
