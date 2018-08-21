@@ -3,8 +3,9 @@
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
     [cljoodle.android.components.common.react-wrappers :as rw]
     [cljoodle.android.components.common.title-component :as title]
-    [cljoodle.http.login :as login]
+    [cljoodle.android.components.common.styles :as styles]
     [cljoodle.http.courses :as courses]
+
     ))
 
 (defn _generate-menu-item
@@ -15,8 +16,7 @@
                            :on-press on-press-func}
    [rw/text {:style {:color       "white"
                      :text-align  "center"
-                     :font-weight "bold"}} title]]
-  )
+                     :font-weight "bold"}} title]])
 
 (defn main-menu-component
   []
@@ -26,13 +26,7 @@
                          @token)
     (dispatch [:set-active-course-id nil])
     [rw/view (title/title-component "MENU")
-     [rw/view {:style {:flex-direction  "column"
-                       :flex-wrap       "nowrap"
-                       :justify-content "space-between"
-                       :margin-top      "5%"
-                       :align-items     "stretch"
-                       :align-content   "space-between"
-                       :height          "85%"}}
+     [rw/view (assoc styles/items-list-container-style :height "85%")
       [rw/scroll-view {:style {:flex-grow 1}}
        (_generate-menu-item "Quizzes" #(dispatch [:set-active-view "quizzes-component"]))
        (_generate-menu-item "FOO" #(prn "FOOO"))]

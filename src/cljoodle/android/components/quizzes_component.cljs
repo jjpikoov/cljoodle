@@ -4,34 +4,33 @@
     [cljoodle.android.components.common.react-wrappers :as rw]
     [cljoodle.android.components.common.navigator-component :as nav]
     [cljoodle.android.components.common.menu-list-component :as menu-list]
-    [cljoodle.converter.courses-converter :as cc]
+    [cljoodle.android.components.common.styles :as styles]
+    [cljoodle.converter.quizzes-converter :as qc]
+    [cljoodle.http.quizzes :as quiz]
     ))
 
 (defn quizzes-component
   []
   (let
-    [course-id (subscribe [:get-active-course-id])]
+    [course-id (subscribe [:get-active-course-id])
+     token (subscribe [:get-token])]
     (if (nil? @course-id)
-      (dispatch [:set-active-view "courses-component"]))
+      (dispatch [:set-active-view "courses-component"])
+      (quiz/get-quizzes #(dispatch [:set-quizzes %])
+                        @token
+                        @course-id))
     [rw/view (nav/navigator-component "Quizzes")
-     [rw/view {:style {:flex-direction  "column"
-                       :flex-wrap       "nowrap"
-                       :justify-content "space-between"
-                       :margin-top      "5%"
-                       :align-items     "stretch"
-                       :align-content   "space-between"
-                       :height          "90%"}}
+     [rw/view styles/items-list-container-style
       [rw/text {:style {:font-size     20
                         :font-weight   "100"
                         :margin-bottom 20
                         :text-align    "center"}} "Choose quiz"]
-      ;(into [rw/scroll-view]
-      ;      (menu-list/menu-list-component
-      ;        (let
-      ;          [quizzes ]
-      ;          [converting-function (partial cc/convert-course-to-menu-component-format
-      ;                                        (fn [id]
-      ;                                          (fn [] (dispatch [:set-active-course-id id]))))]
-      ;          (map converting-function @courses))))
-      ]
-     ]))
+      (into [rw/scroll-view]
+            (menu-list/menu-list-component
+              (let
+                [quizzes (subscribe [:get-quizzes])
+                 converting-function (partial qc/convert-quiz-to-menu-item-format
+                                              (fn [id]
+                                                (fn [] (prn id))))]
+                (map converting-function @quizzes))))
+      ]]))
