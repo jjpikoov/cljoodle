@@ -17,8 +17,30 @@
                          :on-press #(prn i)}]))))
   )
 
+(defn _convert-course-to-menu-component-format
+  [course]
+  {:title    (:shortname course)
+   :on-press #(prn (:shortname course))})
+
+
 (defn quizes-component
   []
-  [comm/view
-   [comm/view (menu/menu-component "Quizes" (_generate-test-data 100))]]
+  (let
+    [courses (subscribe [:get-courses])]
+    [comm/view (nav/navigator-component "Quizes")
+     [comm/view {:style {:flex-direction  "column"
+                         :flex-wrap       "nowrap"
+                         :justify-content "space-between"
+                         :margin-top      "5%"
+                         :align-items     "stretch"
+                         :align-content   "space-between"
+                         :height          "90%"
+                         }}
+      [comm/text {:style {:font-size     20
+                          :font-weight   "100"
+                          :margin-bottom 20
+                          :text-align    "center"}} "Choose course"]
+
+      (into [comm/scroll-view]
+            (menu/menu-list-component (map _convert-course-to-menu-component-format @courses)))]])
   )

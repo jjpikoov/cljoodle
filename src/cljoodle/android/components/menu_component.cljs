@@ -49,31 +49,20 @@
                            :font-weight "bold"}} "Logout"]]]]))
 
 
-(defn menu-component
-  ([title data]
-   [comm/view (nav/navigator-component title)
-    [comm/view {:style {:flex-direction  "column"
-                        :flex-wrap       "nowrap"
-                        :justify-content "space-between"
-                        :margin-top      "5%"
-                        :align-items     "stretch"
-                        :align-content   "space-between"
-                        :height          "90%"
-                        }}
-     (into [comm/scroll-view] (menu-component data))]])
-  ([data]
-   (loop [remaining-data data
-          converted-data []]
-     (if (empty? remaining-data)
-       converted-data
-       (let [[head & rest] remaining-data]
-         (recur rest
-                (into converted-data
-                      [[comm/touchable-highlight {:style    {:background-color "#6e00ce"
-                                                             :padding          5
-                                                             :margin           5}
-                                                  :on-press (:on-press head)}
-                        [comm/text {:style {:color       "white"
-                                            :text-align  "center"
-                                            :font-weight "bold"}} (:title head)]]]
-                      )))))))
+(defn menu-list-component
+  [data]
+  (loop [remaining-data data
+         converted-data []]
+    (if (empty? remaining-data)
+      converted-data
+      (let [[head & rest] remaining-data]
+        (recur rest
+               (into converted-data
+                     [[comm/touchable-highlight {:style    {:background-color "#6e00ce"
+                                                            :padding          5
+                                                            :margin           5}
+                                                 :on-press (:on-press head)}
+                       [comm/text {:style {:color       "white"
+                                           :text-align  "center"
+                                           :font-weight "bold"}} (:title head)]]]
+                     ))))))
