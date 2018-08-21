@@ -24,6 +24,7 @@
     [token (subscribe [:get-token])]
     (courses/get-courses (fn [crs] (dispatch [:set-courses crs]))
                          @token)
+    (dispatch [:set-active-course-id nil])
     [rw/view (title/title-component "MENU")
      [rw/view {:style {:flex-direction  "column"
                        :flex-wrap       "nowrap"

@@ -66,3 +66,11 @@
   validate-spec
   (fn [db [_ value]]
     (assoc db :courses value)))
+
+(reg-event-db
+  :set-active-course-id
+  validate-spec
+  (fn [db [_ value]]
+    (if (not (nil? value))
+      (dispatch [:set-active-view (:previous-view db)]))
+    (assoc db :active-course-id value)))

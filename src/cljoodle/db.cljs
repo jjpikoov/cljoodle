@@ -12,4 +12,5 @@
              :active-view   "login-component"
              :previous-view nil
              :token         ""
-             :courses       nil})
+             :courses       nil
+             :active-course-id nil})

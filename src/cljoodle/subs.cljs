@@ -27,3 +27,8 @@
   :get-courses
   (fn [db _]
     (:courses db)))
+
+(reg-sub
+  :get-active-course-id
+  (fn [db _]
+    (:active-course-id db)))
