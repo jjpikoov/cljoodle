@@ -13,4 +13,5 @@
              :token            ""
              :courses          nil
              :quizzes          nil
+             :events           nil
              :active-course-id nil})

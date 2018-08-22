@@ -1,7 +1,6 @@
 (ns cljoodle.http.login
   (:require [cljoodle.http.util.requests :as requests]
-            [env.moodle.config :as moodle-config])
-  (:use [re-frame.core :only [dispatch]]))
+            [env.moodle.config :as moodle-config]))
 
 (def _login-endpoint (str "/login/token.php"
                           "?" moodle-config/moodle-json-wrap-response-url-param))

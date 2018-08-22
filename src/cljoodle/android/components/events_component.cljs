@@ -6,5 +6,4 @@
 (defn events-component
   []
   [rw/view (nav/navigator-component "Events")
-   [rw/view styles/items-list-container-style]]
-  )
+   [rw/view styles/items-list-container-style]])

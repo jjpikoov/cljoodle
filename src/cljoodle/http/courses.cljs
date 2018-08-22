@@ -1,7 +1,6 @@
 (ns cljoodle.http.courses
   (:require [cljoodle.http.util.requests :as requests]
-            [cljoodle.http.common :as http-comm])
-  (:use [re-frame.core :only [dispatch]]))
+            [cljoodle.http.common :as http-comm]))
 
 
 (defn get-courses

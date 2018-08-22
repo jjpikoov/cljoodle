@@ -31,3 +31,8 @@
   :get-quizzes
   (fn [db _]
     (:quizzes db)))
+
+(reg-sub
+  :get-events
+  (fn [db _]
+    (:events db)))

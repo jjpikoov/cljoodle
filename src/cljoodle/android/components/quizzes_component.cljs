@@ -33,7 +33,7 @@
 (defn quizzes-component
   []
   (let
-    ; subsriptions
+    ; subscribe
     [course-id (subscribe [:get-active-course-id])
      quizzes-final (subscribe [:get-quizzes])
      token (subscribe [:get-token])
@@ -42,7 +42,7 @@
                                   (fn [id] (fn [] (prn id))))
      converted-quizes (map converting-function @quizzes-final)
      ]
-    ; fetching data
+    ; fetch data
     (if (nil? @course-id)
       (do
         (dispatch [:set-active-view "courses-component"])
@@ -52,7 +52,7 @@
           (quiz/get-quizzes #(set-extra-info-for-quizzes @token %)
                             @token
                             @course-id))))
-    ; to render
+    ; render
     [rw/view (nav/navigator-component "Quizzes")
      [rw/view styles/items-list-container-style
       [rw/text {:style {:font-size     20

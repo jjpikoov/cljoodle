@@ -76,3 +76,9 @@
   validate-spec
   (fn [db [_ value]]
     (assoc db :quizzes value)))
+
+(reg-event-db
+  :set-events
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :events value)))
