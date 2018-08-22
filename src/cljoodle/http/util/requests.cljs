@@ -7,9 +7,9 @@
   [url form-params response]
   (if goog.DEBUG
     (js/console.log (str "%cRequested url: " url ",\n"
-                         "Params: " form-params ",\n"
-                         "%cResponse: " response)
-                    "color:green" "color:blue")))
+                         "%cParams: " form-params ",\n"
+                         "%cResponse: " (:body response))
+                    "color:green" "color:red" "color:blue")))
 
 (defn do-post-request
   "Sends asynchronously post request with rom-params & triggers handler on response"

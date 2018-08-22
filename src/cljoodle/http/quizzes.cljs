@@ -4,6 +4,8 @@
   (:use [re-frame.core :only [dispatch]]))
 
 
+(def can-attempt (atom nil))
+
 (defn get-quizzes
   [handler token course-id]
   (let
@@ -19,3 +21,27 @@
       {:wstoken                token
        (keyword "courseids[]") course-id
        :wsfunction             "mod_quiz_get_quizzes_by_courses"})))
+
+(defn get-quiz-eligibility
+  [handler token quiz-id]
+  (requests/do-post-request
+    #(-> %
+         :body
+         :canattempt
+         handler)
+    http-comm/rest-server-url
+    {:wstoken    token
+     :quizid     quiz-id
+     :wsfunction "mod_quiz_get_quiz_access_information"}))
+
+(defn get-quiz-type
+  [handler token quiz-id]
+  (requests/do-post-request
+    #(-> %
+         :body
+         :questiontypes
+         handler)
+    http-comm/rest-server-url
+    {:wstoken    token
+     :quizid     quiz-id
+     :wsfunction "mod_quiz_get_quiz_required_qtypes"}))

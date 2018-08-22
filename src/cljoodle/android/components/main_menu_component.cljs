@@ -5,7 +5,6 @@
     [cljoodle.android.components.common.title-component :as title]
     [cljoodle.android.components.common.styles :as styles]
     [cljoodle.http.courses :as courses]
-
     ))
 
 (defn _generate-menu-item
@@ -29,7 +28,8 @@
      [rw/view (assoc styles/items-list-container-style :height "85%")
       [rw/scroll-view {:style {:flex-grow 1}}
        (_generate-menu-item "Quizzes" #(dispatch [:set-active-view "quizzes-component"]))
-       (_generate-menu-item "FOO" #(prn "FOOO"))]
+       (_generate-menu-item "Events" #(dispatch [:set-active-view "events-component"]))
+       ]
       [rw/touchable-highlight {:style    {:background-color "#c242f4"
                                           :padding          10
                                           :margin           5}

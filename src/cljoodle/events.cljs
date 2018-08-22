@@ -47,6 +47,8 @@
   validate-spec
   (fn [db [_ value]]
     (dispatch [:set-previous-view (:active-view db)])
+    (if (= value "courses-component")
+      (dispatch [:set-quizzes nil]))
     (assoc db :active-view value)))
 
 (reg-event-db
