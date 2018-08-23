@@ -7,7 +7,7 @@
     [cljoodle.android.components.common.navigator-component :as nav]))
 
 
-(defn event-list-component
+(defn _event-list-component
   [data]
   (loop [remaining-data data
          converted-data []]
@@ -19,7 +19,7 @@
                      [[rw/touchable-highlight {:style    {:background-color "#6e00ce"
                                                           :padding          5
                                                           :margin           5}
-                                               :on-press (:on-press (fn [] #(prn (:name head))))}
+                                               :on-press #(prn (:name head))}
                        [rw/text {:style {:color       "white"
                                          :text-align  "center"
                                          :font-weight "bold"}} (:name head)]]]))))))
@@ -40,6 +40,6 @@
     [rw/view (nav/navigator-component "Events")
      [rw/view styles/items-list-container-style
       (into [rw/scroll-view]
-            (event-list-component @events))
+            (_event-list-component @events))
       ]]))
 
