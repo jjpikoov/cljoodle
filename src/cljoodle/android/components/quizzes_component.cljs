@@ -44,9 +44,7 @@
      ]
     ; fetch data
     (if (nil? @course-id)
-      (do
-        (dispatch [:set-active-view "courses-component"])
-        (dispatch [:set-quizzes nil]))
+      (dispatch [:set-active-view "courses-component"])
       (do
         (if (nil? @quizzes-final)
           (quiz/get-quizzes #(set-extra-info-for-quizzes @token %)
