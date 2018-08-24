@@ -10,26 +10,6 @@
     [reagent.core :as r]
     ))
 
-(defn set-extra-info-for-quizzes
-  [token quizzes]
-  (let [__can-attempt (atom nil)
-        __questions-types (atom nil)]
-    (loop
-      [retrieved-quizzes quizzes
-       quizzes-with-info []]
-      (if (empty? retrieved-quizzes)
-        (do
-          (dispatch [:set-quizzes quizzes-with-info]))
-        (let [[head & rest] retrieved-quizzes
-              quiz-id (:id head)]
-          (do
-            (quiz/get-quiz-eligibility #(reset! __can-attempt %) token quiz-id)
-            (quiz/get-quiz-type #(reset! __questions-types %) token quiz-id)
-            (recur rest
-                   (conj quizzes-with-info
-                         (assoc head :can-attempt @__can-attempt
-                                     :question-types @__questions-types)))))))))
-
 (defn quizzes-component
   []
   (let
@@ -47,9 +27,10 @@
       (dispatch [:set-active-view "courses-component"])
       (do
         (if (nil? @quizzes-final)
-          (quiz/get-quizzes #(set-extra-info-for-quizzes @token %)
-                            @token
-                            @course-id))))
+          (quiz/get-quizzes
+            #(dispatch [:set-quizzes %])
+            @token
+            @course-id))))
     ; render
     [rw/view (nav/navigator-component "Quizzes")
      [rw/view styles/items-list-container-style
