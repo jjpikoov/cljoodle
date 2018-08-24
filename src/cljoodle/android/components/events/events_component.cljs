@@ -54,6 +54,7 @@
 
 (defn _add-button
   []
+  (dispatch [:clear-new-events-state])
   [rw/view {:style {:flex-direction  "row"
                     :flex-wrap       "nowrap"
                     :justify-content "center"
@@ -91,7 +92,12 @@
       (into [rw/scroll-view]
             (_event-list-component converted-events @token @course-id))
       [rw/text {:script
+                {:margin-top    2000
+                 :text-align    "center"
+                 :margin-bottom 200}} "."]
+      [rw/text {:script
                 {:margin-top    200
-                 :margin-bottom 200}} ""]
+                 :text-align    "center"
+                 :margin-bottom 200}} "."]
       ]]))
 

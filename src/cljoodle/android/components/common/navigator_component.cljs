@@ -13,7 +13,7 @@
                     :height          50}}
    [rw/button {:style   {}
                :title   "back"
-               :onPress #(dispatch [:set-previous-view nil])}]
+               :onPress #(dispatch [:trigger-previous-view])}]
    [rw/text {:style     {:text-align  "center"
                          :font-weight "bold"
                          :color       "#f0f8ff"}

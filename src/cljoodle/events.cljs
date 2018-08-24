@@ -51,16 +51,12 @@
         (dispatch [:set-views-history (list "menu-component")])
         (if (not (= value (first (:views-history db))))
           (dispatch [:set-views-history (conj (:views-history db) value)]))))
-    ;(if (= value "courses-component")                       ;TODO
-    ;  (dispatch [:set-quizzes nil])
-    ;  (dispatch [:set-events nil])
-    ;  )
     (assoc db :active-view value)))
 
 (reg-event-db
-  :set-previous-view
+  :trigger-previous-view
   validate-spec
-  (fn [db [_ value]]
+  (fn [db [_ _]]
     (let [history (:views-history db)
           prev-candidate (first (rest history))]
       (if (not (nil? prev-candidate))
@@ -79,7 +75,7 @@
   validate-spec
   (fn [db [_ value]]
     (if (not (nil? value))
-      (dispatch [:set-previous-view nil]))
+      (dispatch [:trigger-previous-view]))
     (assoc db :active-course-id value)))
 
 (reg-event-db
@@ -129,3 +125,15 @@
   validate-spec
   (fn [db [_ value]]
     (assoc db :views-history value)))
+
+(reg-event-db
+  :clear-new-events-state
+  validate-spec
+  (fn [db [_ _]]
+    (assoc (assoc (assoc (assoc (assoc db
+                                  :event-new-day 1)
+                           :event-new-month 1)
+                    :event-new-year 2018)
+             :event-new-name nil)
+      :event-new-desc nil)))
+
