@@ -9,7 +9,7 @@
 
 
 (defn _event-list-component
-  [data token]
+  [data token course-id]
   (loop [remaining-data data
          converted-data []]
     (if (empty? remaining-data)
@@ -38,12 +38,12 @@
 
                        [rw/touchable-highlight {:style    {:background-color "#999"
                                                            :border-radius    5}
-                                                :on-press #(evt/remove-event (fn []
-                                                                               (dispatch [:set-active-view "events-component"]))
-                                                                             token
-                                                                             (:id head))
-
-                                                }
+                                                :on-press (fn []
+                                                            (do
+                                                              (evt/remove-event (fn []
+                                                                                  (dispatch [:set-active-view "events-component"])) token (:id head))
+                                                              (evt/get-events #(dispatch [:set-events %])
+                                                                              course-id token)))}
                         [rw/text {:style {:color         "white"
                                           :text-align    "center"
                                           :margin-top    3
@@ -82,15 +82,14 @@
     ; fetch
     (if (nil? @course-id)
       (dispatch [:set-active-view "courses-component"])
-      (if (nil? @events)
-        (evt/get-events #(dispatch [:set-events %])
-                        @token
-                        @course-id)))
+      (evt/get-events #(dispatch [:set-events %])
+                      @token
+                      @course-id))
     [rw/view (nav/navigator-component "Events")
      [rw/view styles/items-list-container-style
       (_add-button)
       (into [rw/scroll-view]
-            (_event-list-component converted-events @token))
+            (_event-list-component converted-events @token @course-id))
       [rw/text {:script
                 {:margin-top    200
                  :margin-bottom 200}} ""]

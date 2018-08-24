@@ -10,6 +10,7 @@
 ;; initial state of app-db
 (def app-db {:active-view      "login-component"
              :previous-view    nil
+             :views-history    (list)
              :token            ""
              :courses          nil
              :active-course-id nil

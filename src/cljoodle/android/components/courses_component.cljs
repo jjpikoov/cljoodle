@@ -11,6 +11,8 @@
 
 (defn courses-component
   []
+  (dispatch [:set-quizzes nil])
+  (dispatch [:set-events nil])
   (let
     [courses (subscribe [:get-courses])]
     [rw/view (nav/navigator-component "Courses")

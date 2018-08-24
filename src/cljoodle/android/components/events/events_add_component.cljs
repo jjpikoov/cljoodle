@@ -35,8 +35,7 @@
         event-name (subscribe [:get-event-new-name])
         event-desc (subscribe [:get-event-new-desc])
         active-course-id (subscribe [:get-active-course-id])
-        token (subscribe [:get-token])
-        ]
+        token (subscribe [:get-token])]
     [rw/view (nav/navigator-component "Add event")
      [rw/view {:style {:align-items "center"}}
       [rw/scroll-view
@@ -87,10 +86,8 @@
                                                            @active-course-id
                                                            {:name        @event-name
                                                             :description @event-desc
-                                                            :timestart   (ec/date_to_epoch_int @year @month @day)
-                                                            })
-                                            (dispatch [:set-active-view "events-component"])
-                                            )}
+                                                            :timestart   (ec/date_to_epoch_int @year @month @day)})
+                                            (dispatch [:set-active-view "events-component"]))}
         [rw/text {:style {:color       "white"
                           :text-align  "center"
                           :padding     15

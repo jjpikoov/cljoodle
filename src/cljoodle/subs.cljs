@@ -15,7 +15,10 @@
 (reg-sub
   :get-previous-view
   (fn [db _]
-    (:previous-view db)))
+    (let [[head & _] (:views-history db)]
+      (if (not (nil? head))
+        head))
+    "main-menu-component"))
 
 (reg-sub
   :get-courses
@@ -57,11 +60,8 @@
   (fn [db _]
     (:event-new-year db)))
 
-
 (reg-sub
   :get-event-new-desc
   (fn [db _]
     (:event-new-desc db)))
-
-
 
