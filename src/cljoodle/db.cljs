@@ -19,4 +19,6 @@
              :event-new-name   nil
              :event-new-day    1
              :event-new-month  12
-             :event-new-year   2018})
+             :event-new-year   2018
+             :event-new-desc   nil
+             })

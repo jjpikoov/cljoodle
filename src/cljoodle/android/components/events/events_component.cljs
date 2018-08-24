@@ -38,7 +38,8 @@
 
                        [rw/touchable-highlight {:style    {:background-color "#999"
                                                            :border-radius    5}
-                                                :on-press #(evt/remove-event prn
+                                                :on-press #(evt/remove-event (fn []
+                                                                               (dispatch [:set-active-view "events-component"]))
                                                                              token
                                                                              (:id head))
 

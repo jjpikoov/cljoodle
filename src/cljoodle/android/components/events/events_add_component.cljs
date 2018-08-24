@@ -2,7 +2,10 @@
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
     [cljoodle.android.components.common.react-wrappers :as rw]
-    [cljoodle.android.components.common.navigator-component :as nav]))
+    [cljoodle.android.components.common.navigator-component :as nav]
+    [cljoodle.http.events :as evt]
+    [cljoodle.converter.events-converter :as ec]
+    ))
 
 (defn _generate-picker-items
   [key-prefix range-start range-end-excl]
@@ -28,7 +31,12 @@
   []
   (let [day (subscribe [:get-event-new-day])
         month (subscribe [:get-event-new-month])
-        year (subscribe [:get-event-new-year])]
+        year (subscribe [:get-event-new-year])
+        event-name (subscribe [:get-event-new-name])
+        event-desc (subscribe [:get-event-new-desc])
+        active-course-id (subscribe [:get-active-course-id])
+        token (subscribe [:get-token])
+        ]
     [rw/view (nav/navigator-component "Add event")
      [rw/view {:style {:align-items "center"}}
       [rw/scroll-view
@@ -63,16 +71,26 @@
         (_generate-year-picker-items)]
 
        ; description
-       [rw/text-input {:style        {:width         200
-                                      :margin-bottom 30}
-                       :placeholder  "Description"
-                       :multiline    true
-                       :onChangeText #(prn "foo")}]
+       [rw/text-input {:style       {:width         200
+                                     :margin-bottom 30}
+                       :placeholder "Description"
+                       :multiline   true
+                       :on-change-text
+                                    #(dispatch [:set-event-new-desc %])}]
 
        ; submit
        [rw/touchable-highlight {:style    {:background-color "#a50e9b"
                                            :margin-bottom    5}
-                                :on-press #(prn "submit")}
+                                :on-press (fn []
+                                            (evt/add-event prn
+                                                           @token
+                                                           @active-course-id
+                                                           {:name        @event-name
+                                                            :description @event-desc
+                                                            :timestart   (ec/date_to_epoch_int @year @month @day)
+                                                            })
+                                            (dispatch [:set-active-view "events-component"])
+                                            )}
         [rw/text {:style {:color       "white"
                           :text-align  "center"
                           :padding     15

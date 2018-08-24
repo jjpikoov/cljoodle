@@ -22,3 +22,16 @@
                              (keyword "events[0][eventid]") event-id
                              (keyword "events[0][repeat]")  1
                              :wsfunction                    "core_calendar_delete_calendar_events"}))
+
+
+(defn add-event
+  [handler token course-id data]
+  (requests/do-post-request #(-> % handler)
+                            http-comm/rest-server-url
+                            {:wstoken                           token
+                             (keyword "events[0][courseid]")    course-id
+                             (keyword "events[0][name]")        (:name data)
+                             (keyword "events[0][format]")      2
+                             (keyword "events[0][description]") (:description data)
+                             (keyword "events[0][timestart]")   (:timestart data)
+                             :wsfunction                        "core_calendar_create_calendar_events"}))

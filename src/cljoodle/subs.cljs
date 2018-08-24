@@ -58,4 +58,10 @@
     (:event-new-year db)))
 
 
+(reg-sub
+  :get-event-new-desc
+  (fn [db _]
+    (:event-new-desc db)))
+
+
 
