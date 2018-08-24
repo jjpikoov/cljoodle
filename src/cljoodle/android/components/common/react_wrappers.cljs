@@ -7,6 +7,8 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def scroll-view (r/adapt-react-class (.-ScrollView ReactNative)))
+(def picker (r/adapt-react-class (.-Picker ReactNative)))
+(def picker-item (r/adapt-react-class (.-Picker.Item ReactNative)))
 (def image (r/adapt-react-class (.-Image ReactNative)))
 (def text-input (r/adapt-react-class (.-TextInput ReactNative)))
 (def button (r/adapt-react-class (.-Button ReactNative)))

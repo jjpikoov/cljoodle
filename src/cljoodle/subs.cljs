@@ -36,3 +36,26 @@
   :get-events
   (fn [db _]
     (:events db)))
+
+(reg-sub
+  :get-event-new-name
+  (fn [db _]
+    (:event-new-name db)))
+
+(reg-sub
+  :get-event-new-day
+  (fn [db _]
+    (:event-new-day db)))
+
+(reg-sub
+  :get-event-new-month
+  (fn [db _]
+    (:event-new-month db)))
+
+(reg-sub
+  :get-event-new-year
+  (fn [db _]
+    (:event-new-year db)))
+
+
+

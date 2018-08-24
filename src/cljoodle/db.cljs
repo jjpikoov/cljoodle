@@ -12,6 +12,11 @@
              :previous-view    nil
              :token            ""
              :courses          nil
+             :active-course-id nil
              :quizzes          nil
              :events           nil
-             :active-course-id nil})
+             ; new event
+             :event-new-name   nil
+             :event-new-day    1
+             :event-new-month  12
+             :event-new-year   2018})

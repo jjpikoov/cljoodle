@@ -83,3 +83,27 @@
   validate-spec
   (fn [db [_ value]]
     (assoc db :events value)))
+
+(reg-event-db
+  :set-event-new-name
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :event-new-name value)))
+
+(reg-event-db
+  :set-event-new-day
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :event-new-day value)))
+
+(reg-event-db
+  :set-event-new-month
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :event-new-month value)))
+
+(reg-event-db
+  :set-event-new-year
+  validate-spec
+  (fn [db [_ value]]
+    (assoc db :event-new-year value)))

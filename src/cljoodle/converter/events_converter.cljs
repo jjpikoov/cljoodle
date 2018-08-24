@@ -6,4 +6,5 @@
   {:name        (:name event)
    :description (:description event)
    :timestart   (.toString (js/Date. (* (:timestart event) 1000)))
+   :id          (:id event)
    :on-press    (on-press-function (:id event))})

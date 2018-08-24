@@ -1,6 +1,7 @@
 (ns cljoodle.converter.quizzes-converter)
 
 (defn convert-quiz-to-menu-item-format
-  [on-press-function course]
-  {:title    (:name course)
-   :on-press (on-press-function (:id course))})
+  [on-press-function quiz]
+  {:title    (:name quiz)
+   :id (:id quiz)
+   :on-press (on-press-function (:id quiz))})

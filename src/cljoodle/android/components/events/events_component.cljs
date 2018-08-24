@@ -1,4 +1,4 @@
-(ns cljoodle.android.components.events-component
+(ns cljoodle.android.components.events.events-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
     [cljoodle.android.components.common.react-wrappers :as rw]
@@ -9,7 +9,7 @@
 
 
 (defn _event-list-component
-  [data]
+  [data token]
   (loop [remaining-data data
          converted-data []]
     (if (empty? remaining-data)
@@ -34,7 +34,39 @@
                          (if (and (not (nil? description))
                                   (not (= "" description)))
                            [rw/view {:style {:background-color "#41f4dc"}}
-                            [rw/text {:style {:text-align "center"}} description]]))]]))))))
+                            [rw/text {:style {:text-align "center"}} description]]))
+
+                       [rw/touchable-highlight {:style    {:background-color "#999"
+                                                           :border-radius    5}
+                                                :on-press #(evt/remove-event prn
+                                                                             token
+                                                                             (:id head))
+
+                                                }
+                        [rw/text {:style {:color         "white"
+                                          :text-align    "center"
+                                          :margin-top    3
+                                          :margin-bottom 3
+                                          :font-weight   "bold"}} "REMOVE"]]
+
+                       ]]))))))
+
+(defn _add-button
+  []
+  [rw/view {:style {:flex-direction  "row"
+                    :flex-wrap       "nowrap"
+                    :justify-content "center"
+                    :align-items     "flex-start"
+                    :align-content   "stretch"}
+            }
+   [rw/touchable-highlight {:style    {:background-color "#a50e9b"
+                                       :margin-bottom    5}
+                            :on-press #(dispatch [:set-active-view "events-add-component"])}
+    [rw/text {:style {:color       "white"
+                      :text-align  "center"
+                      :padding     15
+                      :font-weight "bold"}} "+"]]
+   ])
 
 (defn events-component
   []
@@ -55,6 +87,11 @@
                         @course-id)))
     [rw/view (nav/navigator-component "Events")
      [rw/view styles/items-list-container-style
+      (_add-button)
       (into [rw/scroll-view]
-            (_event-list-component converted-events))]]))
+            (_event-list-component converted-events @token))
+      [rw/text {:script
+                {:margin-top    200
+                 :margin-bottom 200}} ""]
+      ]]))
 

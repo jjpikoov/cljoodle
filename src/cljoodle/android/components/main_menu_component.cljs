@@ -4,8 +4,7 @@
     [cljoodle.android.components.common.react-wrappers :as rw]
     [cljoodle.android.components.common.title-component :as title]
     [cljoodle.android.components.common.styles :as styles]
-    [cljoodle.http.courses :as courses]
-    ))
+    [cljoodle.http.courses :as courses]))
 
 (defn _generate-menu-item
   [title on-press-func]
