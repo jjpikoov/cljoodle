@@ -1,6 +1,6 @@
 (ns cljoodle.android.components.common.styles)
 
-(def items-list-container-style
+(def item-list-container-style
   {:style {:flex-direction  "column"
            :flex-wrap       "nowrap"
            :justify-content "space-between"

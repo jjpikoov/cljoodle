@@ -136,4 +136,3 @@
                     :event-new-year 2018)
              :event-new-name nil)
       :event-new-desc nil)))
-

@@ -1,11 +1,12 @@
 (ns cljoodle.android.components.common.menu-list-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-    [cljoodle.android.components.common.react-wrappers :as rw]
-    ))
+    [cljoodle.android.components.common.react-wrappers :as rw]))
 
 
 (defn menu-list-component
+  "Component for generating list of items
+  * data - items with format [{:on-press :title}]"
   [data]
   (loop [remaining-data data
          converted-data []]

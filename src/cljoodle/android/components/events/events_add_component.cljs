@@ -4,10 +4,14 @@
     [cljoodle.android.components.common.react-wrappers :as rw]
     [cljoodle.android.components.common.navigator-component :as nav]
     [cljoodle.http.events :as evt]
-    [cljoodle.converter.events-converter :as ec]
-    ))
+    [cljoodle.converter.events-converter :as ec]))
 
-(defn _generate-picker-items
+(defn- generate-picker-items
+  "Generates items for picker
+  * key-prefix - used for generating unique html id
+  * range-start - first picker item value and label
+  * range-end-excl - last (excl) picker item value and label
+  "
   [key-prefix range-start range-end-excl]
   (map (fn [i]
          [rw/picker-item {:key   (str key-prefix i)
@@ -15,17 +19,17 @@
                           :value (str i)}])
        (range range-start range-end-excl)))
 
-(defn _generate-days-picker-items
+(defn- generate-day-picker-items
   []
-  (_generate-picker-items "day" 1 31))
+  (generate-picker-items "day" 1 31))
 
-(defn _generate-month-picker-items
+(defn- generate-month-picker-items
   []
-  (_generate-picker-items "month" 1 13))
+  (generate-picker-items "month" 1 13))
 
-(defn _generate-year-picker-items
+(defn- generate-year-picker-items
   []
-  (_generate-picker-items "year" 2018 (+ 2018 50)))
+  (generate-picker-items "year" 2018 (+ 2018 50)))
 
 (defn events-add-component
   []
@@ -51,7 +55,7 @@
                    :selected-value  @day
                    :mode            "dropdown"
                    :on-value-change #(dispatch [:set-event-new-day %])}
-        (_generate-days-picker-items)]
+        (generate-day-picker-items)]
 
        ; month
        [rw/text {:style {:padding-top 20}} "Month"]
@@ -59,7 +63,7 @@
                    :selected-value  @month
                    :mode            "dropdown"
                    :on-value-change #(dispatch [:set-event-new-month %])}
-        (_generate-month-picker-items)]
+        (generate-month-picker-items)]
 
        ; year
        [rw/text {:style {:padding-top 20}} "Year"]
@@ -67,7 +71,7 @@
                    :selected-value  @year
                    :mode            "dropdown"
                    :on-value-change #(dispatch [:set-event-new-year %])}
-        (_generate-year-picker-items)]
+        (generate-year-picker-items)]
 
        ; description
        [rw/text-input {:style       {:width         200
@@ -91,6 +95,4 @@
         [rw/text {:style {:color       "white"
                           :text-align  "center"
                           :padding     15
-                          :font-weight "bold"}} "+"]]
-
-       ]]]))
+                          :font-weight "bold"}} "+"]]]]]))

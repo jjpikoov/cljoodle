@@ -5,8 +5,7 @@
     [cljoodle.android.components.common.navigator-component :as nav]
     [cljoodle.android.components.common.menu-list-component :as menu-list]
     [cljoodle.converter.courses-converter :as cc]
-    [cljoodle.android.components.common.styles :as styles]
-    ))
+    [cljoodle.android.components.common.styles :as styles]))
 
 
 (defn courses-component
@@ -16,7 +15,7 @@
   (let
     [courses (subscribe [:get-courses])]
     [rw/view (nav/navigator-component "Courses")
-     [rw/view styles/items-list-container-style
+     [rw/view styles/item-list-container-style
       [rw/text {:style {:font-size     20
                         :font-weight   "100"
                         :margin-bottom 20
@@ -24,8 +23,8 @@
       (into [rw/scroll-view]
             (menu-list/menu-list-component
               (let
-                [converting-function (partial cc/convert-course-to-menu-item-format
-                                              (fn [id]
-                                                (fn [] (dispatch [:set-active-course-id id]))))]
-                (map converting-function @courses))))]])
-  )
+                [converting-function (partial
+                                       cc/convert-course-to-menu-item-format
+                                       (fn [id]
+                                         (fn [] (dispatch [:set-active-course-id id]))))]
+                (map converting-function @courses))))]]))

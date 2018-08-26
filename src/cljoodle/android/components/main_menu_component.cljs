@@ -6,7 +6,8 @@
     [cljoodle.android.components.common.styles :as styles]
     [cljoodle.http.courses :as courses]))
 
-(defn _generate-menu-item
+(defn- generate-menu-item
+  "Generates main menu item with given title and function to trigger when item tapped"
   [title on-press-func]
   [rw/touchable-highlight {:style    {:background-color "#6e00ce"
                                       :padding          5
@@ -24,11 +25,10 @@
                          @token)
     (dispatch [:set-active-course-id nil])
     [rw/view (title/title-component "MENU")
-     [rw/view (assoc styles/items-list-container-style :height "85%")
+     [rw/view (assoc styles/item-list-container-style :height "85%")
       [rw/scroll-view {:style {:flex-grow 1}}
-       (_generate-menu-item "Quizzes" #(dispatch [:set-active-view "quizzes-component"]))
-       (_generate-menu-item "Events" #(dispatch [:set-active-view "events-component"]))
-       ]
+       (generate-menu-item "Quizzes" #(dispatch [:set-active-view "quizzes-component"]))
+       (generate-menu-item "Events" #(dispatch [:set-active-view "events-component"]))]
       [rw/touchable-highlight {:style    {:background-color "#c242f4"
                                           :padding          10
                                           :margin           5}

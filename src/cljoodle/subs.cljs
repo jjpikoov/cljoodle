@@ -64,4 +64,3 @@
   :get-event-new-desc
   (fn [db _]
     (:event-new-desc db)))
-

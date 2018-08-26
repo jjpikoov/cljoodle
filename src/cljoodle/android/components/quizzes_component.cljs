@@ -7,8 +7,7 @@
     [cljoodle.android.components.common.styles :as styles]
     [cljoodle.converter.quizzes-converter :as qc]
     [cljoodle.http.quizzes :as quiz]
-    [reagent.core :as r]
-    ))
+    [reagent.core :as r]))
 
 (defn quizzes-component
   []
@@ -19,9 +18,8 @@
      token (subscribe [:get-token])
      ; util functions
      converting-function (partial qc/convert-quiz-to-menu-item-format
-                                  (fn [id] (fn [] (prn id))))
-     converted-quizes (map converting-function @quizzes-final)
-     ]
+                                  (fn [id] (fn [] nil)))
+     converted-quizes (map converting-function @quizzes-final)]
     ; fetch data
     (if (nil? @course-id)
       (dispatch [:set-active-view "courses-component"])
@@ -33,13 +31,10 @@
             @course-id))))
     ; render
     [rw/view (nav/navigator-component "Quizzes")
-     [rw/view styles/items-list-container-style
+     [rw/view styles/item-list-container-style
       [rw/text {:style {:font-size     20
                         :font-weight   "100"
                         :margin-bottom 20
                         :text-align    "center"}} "Choose quiz"]
       (into [rw/scroll-view]
-            (menu-list/menu-list-component converted-quizes))
-      ]]))
-
-
+            (menu-list/menu-list-component converted-quizes))]]))

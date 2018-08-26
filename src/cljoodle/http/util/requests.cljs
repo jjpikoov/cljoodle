@@ -3,7 +3,7 @@
   (:require [cljs-http.client :as http]
             [cljs.core.async :refer [<!]]))
 
-(defn _debug-request
+(defn- debug-request
   [url form-params response]
   (if goog.DEBUG
     (js/console.log (str "%cRequested url: " url ",\n"
@@ -15,5 +15,5 @@
   "Sends asynchronously post request with rom-params & triggers handler on response"
   [handler url form-params]
   (go (let [response (<! (http/post url {:form-params form-params}))]
-        (_debug-request url form-params response)
+        (debug-request url form-params response)
         (handler response))))

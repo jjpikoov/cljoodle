@@ -5,6 +5,7 @@
 
 
 (defn navigator-component
+  "Component showing back button, title and main menu button"
   [title]
   [rw/view {:style {:flex-direction  "row"
                     :align-items     "center"

@@ -3,6 +3,7 @@
     [cljoodle.android.components.common.react-wrappers :as rw]))
 
 (defn title-component
+  "Component generates only title (no back and main menu button)"
   [title]
   [rw/view {:style {:flex-direction  "row"
                     :align-items     "center"

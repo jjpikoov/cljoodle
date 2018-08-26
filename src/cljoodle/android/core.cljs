@@ -10,10 +10,9 @@
     [cljoodle.android.components.quizzes-component :refer [quizzes-component]]
     [cljoodle.android.components.courses-component :refer [courses-component]]
     [cljoodle.android.components.events.events-add-component :refer [events-add-component]]
-    [cljoodle.android.components.events.events-component :refer [events-component]]
-    ))
+    [cljoodle.android.components.events.events-component :refer [events-component]]))
 
-(defn _choose-main-component-to-render
+(defn- choose-main-component-to-render
   [component-name]
   (if (= component-name "login-component")
     (login-component)
@@ -33,7 +32,7 @@
   (let
     [active-view (subscribe [:get-active-view])]
     (fn []
-      [rw/view (_choose-main-component-to-render @active-view)])))
+      [rw/view (choose-main-component-to-render @active-view)])))
 
 (defn init []
   (dispatch-sync [:initialize-db])
