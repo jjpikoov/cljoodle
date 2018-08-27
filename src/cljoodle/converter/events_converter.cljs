@@ -1,10 +1,10 @@
 (ns cljoodle.converter.events-converter)
 
-(defn- epoch_time_to_string
+(defn- epoch-time-to-string
   [epoch-time]
   (.toString (js/Date. (* epoch-time 1000))))
 
-(defn date_to_epoch_int
+(defn date-to-epoch-int
   [year month day]
   (/ (.getTime (js/Date. year, (dec month), day)) 1000))
 
@@ -12,5 +12,5 @@
   [event]
   {:name        (:name event)
    :description (:description event)
-   :timestart   (epoch_time_to_string (:timestart event))
+   :timestart   (epoch-time-to-string (:timestart event))
    :id          (:id event)})

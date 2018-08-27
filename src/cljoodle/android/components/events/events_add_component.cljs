@@ -90,7 +90,7 @@
                                                            @active-course-id
                                                            {:name        @event-name
                                                             :description @event-desc
-                                                            :timestart   (ec/date_to_epoch_int @year @month @day)})
+                                                            :timestart   (ec/date-to-epoch-int @year @month @day)})
                                             (dispatch [:set-active-view "events-component"]))}
         [rw/text {:style {:color       "white"
                           :text-align  "center"
