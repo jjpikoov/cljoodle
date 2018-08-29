@@ -1,3 +1,4 @@
+;;; File declares common styles
 (ns cljoodle.android.components.common.styles)
 
 (def item-list-container-style

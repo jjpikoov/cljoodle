@@ -1,8 +1,10 @@
+;;; File declares http service for quizzes
 (ns cljoodle.http.quizzes
   (:require [cljoodle.http.util.requests :as requests]
             [cljoodle.http.common :as http-comm]))
 
 (defn get-quizzes
+  "Makes http request and uses handler on response"
   [handler token course-id]
   (let
     [symbols-needed [:id :name]
@@ -19,6 +21,7 @@
        :wsfunction             "mod_quiz_get_quizzes_by_courses"})))
 
 (defn get-quiz-eligibility
+  "Makes http request and uses handler on response"
   [handler token quiz-id]
   (requests/do-post-request
     #(-> %
@@ -31,6 +34,7 @@
      :wsfunction "mod_quiz_get_quiz_access_information"}))
 
 (defn get-quiz-type
+  "Makes http request and uses handler on response"
   [handler token quiz-id]
   (requests/do-post-request
     #(-> %

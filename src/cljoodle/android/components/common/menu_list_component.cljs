@@ -1,3 +1,4 @@
+;;; File declares menu list component
 (ns cljoodle.android.components.common.menu-list-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -5,7 +6,8 @@
 
 
 (defn menu-list-component
-  "Component for generating list of items
+  "Returns Hiccup data for component for generating list of items
+  
   * data - items with format [{:on-press :title}]"
   [data]
   (loop [remaining-data data

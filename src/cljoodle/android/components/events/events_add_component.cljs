@@ -1,3 +1,4 @@
+;;; File declares component for adding new event
 (ns cljoodle.android.components.events.events-add-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -7,11 +8,10 @@
     [cljoodle.converter.events-converter :as ec]))
 
 (defn- generate-picker-items
-  "Generates items for picker
+  "Function return Hiccup data for picker
   * key-prefix - used for generating unique html id
   * range-start - first picker item value and label
-  * range-end-excl - last (excl) picker item value and label
-  "
+  * range-end-excl - last (excl) picker item value and label"
   [key-prefix range-start range-end-excl]
   (map (fn [i]
          [rw/picker-item {:key   (str key-prefix i)
@@ -32,6 +32,7 @@
   (generate-picker-items "year" 2018 (+ 2018 50)))
 
 (defn events-add-component
+  "Function returns Hiccup data for adding new event"
   []
   (let [day (subscribe [:get-event-new-day])
         month (subscribe [:get-event-new-month])

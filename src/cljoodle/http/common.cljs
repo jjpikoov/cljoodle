@@ -1,3 +1,4 @@
+;;; File declares Moodle rest server urls
 (ns cljoodle.http.common
   (:require [env.moodle.config :as moodle-config]))
 

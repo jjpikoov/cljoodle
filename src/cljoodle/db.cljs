@@ -1,3 +1,4 @@
+;;; File declares initial state and its structure
 (ns cljoodle.db
   (:require [clojure.spec.alpha :as spec]))
 

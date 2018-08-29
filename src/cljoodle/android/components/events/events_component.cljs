@@ -1,3 +1,4 @@
+;;; File declares component for list of events
 (ns cljoodle.android.components.events.events-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -9,10 +10,14 @@
 
 
 (defn- event-list-component
-  "Generates list with events based on given data
+  "Returns Hiccup data with events based on passed data
+
   * data - output of cljoodle.converter.events-converter/convert-event-to-menu-item-format
   * token - user token for request
-  * course-id - id of active course"
+  * course-id - id of active course
+
+  It also assigns action to each event item, when tapping remove it triggers fetch & refresh of events.
+  "
   [data token course-id]
   (let [on-remove-func
         (fn [head]
@@ -56,8 +61,7 @@
                                             :font-weight   "bold"}} "REMOVE"]]]])))))))
 
 (defn- add-button-component
-  "Component generates button, after tapping it
-  :set-active-view \"events-add-component\" is triggered."
+  "Function returns Hiccup data with add event button. (+)"
   []
   (dispatch [:clear-new-events-state])
   [rw/view {:style {:flex-direction  "row"
@@ -74,6 +78,9 @@
                       :font-weight "bold"}} "+"]]])
 
 (defn events-component
+  "Function returns Hiccup data needed to render events view
+
+  If course is not set it dispatches component change"
   []
   ; subscribe
   (let [token (subscribe [:get-token])

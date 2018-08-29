@@ -1,3 +1,4 @@
+;;; File declares possible events that can be made on state
 (ns cljoodle.events
   (:require
     [re-frame.core :refer [reg-event-db after dispatch]]

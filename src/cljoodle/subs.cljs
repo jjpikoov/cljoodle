@@ -1,3 +1,4 @@
+;;; File declares subscription handles,
 (ns cljoodle.subs
   (:require
     [re-frame.core :refer [reg-sub]]))

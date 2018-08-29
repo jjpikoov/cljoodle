@@ -1,3 +1,4 @@
+;;; File declares http service for login & authentication
 (ns cljoodle.http.login
   (:require [cljoodle.http.util.requests :as requests]
             [env.moodle.config :as moodle-config]))
@@ -10,7 +11,8 @@
        login-endpoint))
 
 (defn get-token-providing-login-password
-  "Tries to obtain token for given credentials, if succeeds dispatches token change action"
+  "Tries to obtain token for given credentials, if succeeds dispatches token change action.
+  Also uses handler on response"
   [handler login password]
   (let [retrieve-token-from-response-func #(:token (:body %))]
     (requests/do-post-request #(-> %

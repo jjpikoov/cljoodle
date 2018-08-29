@@ -1,3 +1,4 @@
+;;; File declares component for choosing course
 (ns cljoodle.android.components.courses-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -9,6 +10,9 @@
 
 
 (defn courses-component
+  "Function returns Hiccup data for course selection view
+
+  It clears out all db quizzes and events"
   []
   (dispatch [:set-quizzes nil])
   (dispatch [:set-events nil])

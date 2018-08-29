@@ -1,3 +1,4 @@
+;;; File declares navigator-component
 (ns cljoodle.android.components.common.navigator-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -5,7 +6,9 @@
 
 
 (defn navigator-component
-  "Component showing back button, title and main menu button"
+  "Returns Hiccup data for showing back button, title and main menu button
+
+  * title - title to display"
   [title]
   [rw/view {:style {:flex-direction  "row"
                     :align-items     "center"

@@ -1,3 +1,4 @@
+;;; File declares component for showing main menu
 (ns cljoodle.android.components.main-menu-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -7,7 +8,7 @@
     [cljoodle.http.courses :as courses]))
 
 (defn- generate-menu-item
-  "Generates main menu item with given title and function to trigger when item tapped"
+  "Generates main menu Hiccup item with given title and function to trigger when item is tapped"
   [title on-press-func]
   [rw/touchable-highlight {:style    {:background-color "#6e00ce"
                                       :padding          5
@@ -18,6 +19,11 @@
                      :font-weight "bold"}} title]])
 
 (defn main-menu-component
+  "Function returns Hiccup data for showing main menu.
+
+  It fetches all available courses at this moment to speed up further actions.
+  It also dispatches action of clearing active course id.
+  If user taps logout button it clears token."
   []
   (let
     [token (subscribe [:get-token])]

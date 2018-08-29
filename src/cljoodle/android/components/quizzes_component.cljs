@@ -1,3 +1,4 @@
+;;; File declares component for showing quizes for given course
 (ns cljoodle.android.components.quizzes-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -10,6 +11,10 @@
     [reagent.core :as r]))
 
 (defn quizzes-component
+  "Function returns Hiccup data for showing quizzes.
+
+  If user has not set course it dispatches change of component to courses-component,
+  if course is already chosen it fetches data from Moodle and generates list of quizes"
   []
   (let
     ; subscribe

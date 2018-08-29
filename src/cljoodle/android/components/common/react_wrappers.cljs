@@ -1,3 +1,4 @@
+;;; File declares reagent wrappers for react native stuff
 (ns cljoodle.android.components.common.react-wrappers
   (:require [reagent.core :as r]))
 

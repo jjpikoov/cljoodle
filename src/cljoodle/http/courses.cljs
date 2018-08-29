@@ -1,9 +1,11 @@
+;;; File declares http service for courses
 (ns cljoodle.http.courses
   (:require [cljoodle.http.util.requests :as requests]
             [cljoodle.http.common :as http-comm]))
 
 
 (defn get-courses
+  "Makes http request and uses handler on response"
   [handler token]
   (let
     [symbols-needed [:id :shortname]

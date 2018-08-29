@@ -1,3 +1,4 @@
+;;; File declares component for login page
 (ns cljoodle.android.components.login-component
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
@@ -6,6 +7,9 @@
     [cljoodle.http.login :as login]))
 
 (defn wrong-login-password-component
+  "Function returns Hiccup data for showing text with information about login failure depending on nullability of token
+
+  * token - token to check"
   [token]
   (if (nil? token)
     [rw/text {:style {:font-size  15
@@ -14,6 +18,9 @@
                       :text-align "center"}} "Wrong login or/and password!"]))
 
 (defn login-component
+  "Function returns Hiccup data for showing login page.
+
+  If provided login data is valid than token is set"
   []
   (let [login (r/atom "")
         password (r/atom "")

@@ -1,9 +1,11 @@
+;;; File declares http service for events
 (ns cljoodle.http.events
   (:require [cljoodle.http.util.requests :as requests]
             [cljoodle.http.common :as http-comm]))
 
 
 (defn get-events
+  "Makes http request and uses handler on response"
   [handler token course-id]
   (requests/do-post-request #(-> %
                                  :body
@@ -15,6 +17,7 @@
                              :wsfunction                      "core_calendar_get_calendar_events"}))
 
 (defn remove-event
+  "Makes http request and uses handler on response"
   [handler token event-id]
   (requests/do-post-request #(-> % handler)
                             http-comm/rest-server-url
@@ -25,6 +28,7 @@
 
 
 (defn add-event
+  "Makes http request and uses handler on response"
   [handler token course-id data]
   (requests/do-post-request #(-> % handler)
                             http-comm/rest-server-url
